@@ -172,10 +172,13 @@ const EducationSection = ({ y }: { y: number }) => {
 
 /* ─── EXPERIENCE ─── */
 const ExperienceTimeline = ({ y }: { y: number }) => {
+  const isMobile = useIsMobile();
+  const sideOffset = isMobile ? 0 : 5;
+  const cardWidth = isMobile ? 5.5 : 7;
   const exps = [
-    { title: 'TDI Intern', co: 'Deutsche Bank', desc: 'Pre-Placement Offer. Built IncidentHub using embeddings and vector search.', dy: 4, color: '#4d7cff', side: 5 },
-    { title: 'Teaching Assistant', co: 'IIT Bombay', desc: 'Applied Data Science and ML. Mentoring students through lab sessions.', dy: 0, color: '#22d3ee', side: -5 },
-    { title: 'AI/ML Intern', co: 'Samespace Labs', desc: 'Built and fine-tuned a TTS model for Tagalish. Implemented scalable GRPC architecture.', dy: -4, color: '#a855f7', side: 5 },
+    { title: 'TDI Intern', co: 'Deutsche Bank', desc: 'Pre-Placement Offer. Built IncidentHub using embeddings and vector search.', dy: 4, color: '#4d7cff', side: sideOffset },
+    { title: 'Teaching Assistant', co: 'IIT Bombay', desc: 'Applied Data Science and ML. Mentoring students through lab sessions.', dy: 0, color: '#22d3ee', side: -sideOffset },
+    { title: 'AI/ML Intern', co: 'Samespace Labs', desc: 'Built and fine-tuned a TTS model for Tagalish. Implemented scalable GRPC architecture.', dy: -4, color: '#a855f7', side: sideOffset },
   ];
   return (
     <group position={[0, y, 0]}>
@@ -187,20 +190,20 @@ const ExperienceTimeline = ({ y }: { y: number }) => {
         <Float key={i} speed={1.5} rotationIntensity={0.03} floatIntensity={0.15}>
           <group position={[e.side, e.dy, 0]}>
             <mesh>
-              <boxGeometry args={[7, 3, 0.06]} />
+              <boxGeometry args={[cardWidth, 3, 0.06]} />
               <meshBasicMaterial color={e.color} transparent opacity={0.1} />
             </mesh>
             <mesh>
-              <boxGeometry args={[7.06, 3.06, 0.03]} />
+              <boxGeometry args={[cardWidth + 0.06, 3.06, 0.03]} />
               <meshBasicMaterial color={e.color} transparent opacity={0.35} wireframe />
             </mesh>
-            <Text position={[0, 0.8, 0.08]} fontSize={0.35} color="#e2e8f0" anchorX="center">
+            <Text position={[0, 0.8, 0.08]} fontSize={isMobile ? 0.3 : 0.35} color="#e2e8f0" anchorX="center">
               {e.title}
             </Text>
-            <Text position={[0, 0.3, 0.08]} fontSize={0.25} color={e.color} anchorX="center">
+            <Text position={[0, 0.3, 0.08]} fontSize={isMobile ? 0.22 : 0.25} color={e.color} anchorX="center">
               {e.co}
             </Text>
-            <Text position={[0, -0.4, 0.08]} fontSize={0.18} color="#94a3b8" anchorX="center" maxWidth={6.2} textAlign="center" lineHeight={1.5}>
+            <Text position={[0, -0.4, 0.08]} fontSize={isMobile ? 0.16 : 0.18} color="#94a3b8" anchorX="center" maxWidth={cardWidth - 0.8} textAlign="center" lineHeight={1.5}>
               {e.desc}
             </Text>
           </group>
@@ -255,32 +258,37 @@ const OrbitItem = ({ label, color, r, speed, offset }: { label: string; color: s
 /* ─── TERMINAL ─── */
 const TerminalSection = ({ y }: { y: number }) => {
   const ref = useRef<THREE.Group>(null);
+  const isMobile = useIsMobile();
+  const w = isMobile ? 7 : 10;
+  const h = isMobile ? 4.5 : 5.5;
+  const lx = isMobile ? -2.8 : -4;
+  const fs = isMobile ? 0.18 : 0.22;
   useFrame(({ clock }) => {
     if (ref.current) ref.current.position.y = y + Math.sin(clock.elapsedTime * 0.3) * 0.3;
   });
   return (
     <group ref={ref} position={[0, y, 0]}>
       <mesh>
-        <boxGeometry args={[10, 5.5, 0.2]} />
+        <boxGeometry args={[w, h, 0.2]} />
         <meshBasicMaterial color="#0f1729" />
       </mesh>
       <mesh position={[0, 0, -0.08]}>
-        <boxGeometry args={[10.2, 5.7, 0.06]} />
+        <boxGeometry args={[w + 0.2, h + 0.2, 0.06]} />
         <meshBasicMaterial color="#4d7cff" transparent opacity={0.25} />
       </mesh>
-      <Text position={[-4, 1.5, 0.15]} fontSize={0.22} color="#4d7cff" anchorX="left">
+      <Text position={[lx, 1.5, 0.15]} fontSize={fs} color="#4d7cff" anchorX="left" maxWidth={w - 1}>
         {'$ echo "Let\'s build something meaningful"'}
       </Text>
-      <Text position={[-4, 0.8, 0.15]} fontSize={0.3} color="#c084fc" anchorX="left">
+      <Text position={[lx, 0.8, 0.15]} fontSize={isMobile ? 0.25 : 0.3} color="#c084fc" anchorX="left" maxWidth={w - 1}>
         {"Let's build something meaningful"}
       </Text>
-      <Text position={[-4, 0, 0.15]} fontSize={0.22} color="#4d7cff" anchorX="left">
+      <Text position={[lx, 0, 0.15]} fontSize={fs} color="#4d7cff" anchorX="left">
         {'$ contact --email'}
       </Text>
-      <Text position={[-4, -0.6, 0.15]} fontSize={0.26} color="#22d3ee" anchorX="left">
+      <Text position={[lx, -0.6, 0.15]} fontSize={isMobile ? 0.22 : 0.26} color="#22d3ee" anchorX="left">
         varadpatil5424@gmail.com
       </Text>
-      <Text position={[-4, -1.6, 0.15]} fontSize={0.18} color="#6b7280" anchorX="left">
+      <Text position={[lx, -1.6, 0.15]} fontSize={isMobile ? 0.15 : 0.18} color="#6b7280" anchorX="left" maxWidth={w - 1}>
         © 2026 Varad Vikas Patil. All rights reserved.
       </Text>
     </group>
@@ -290,14 +298,28 @@ const TerminalSection = ({ y }: { y: number }) => {
 /* ─── CAMERA RIG ─── */
 const CameraRig = () => {
   const scroll = useScroll();
-  const isMobile = useIsMobile();
-  const zDist = isMobile ? 24 : 14;
+  const { viewport } = useThree();
 
   useFrame((state) => {
+    const aspect = viewport.aspect;
+    // Portrait phone: push camera back; landscape phone: bring closer; desktop: normal
+    let zDist: number;
+    if (aspect < 0.7) {
+      // Portrait phone
+      zDist = 18;
+    } else if (aspect < 1.2) {
+      // Landscape phone / small tablet
+      zDist = 14;
+    } else {
+      // Desktop / wide
+      zDist = 14;
+    }
+
     const t = scroll.offset;
     const y = 38 - t * 72;
+    const xSway = aspect < 0.7 ? Math.sin(t * Math.PI * 2) * 1.5 : Math.sin(t * Math.PI * 2) * 3;
     state.camera.position.set(
-      Math.sin(t * Math.PI * 2) * 3,
+      xSway,
       y + 3,
       zDist
     );
