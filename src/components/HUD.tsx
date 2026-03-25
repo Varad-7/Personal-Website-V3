@@ -66,25 +66,7 @@ export const HUD = () => {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 sm:gap-6 pointer-events-auto"
       >
-        {/* Scroll indicator - hidden when at bottom */}
-        <AnimatePresence>
-          {!isAtBottom && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col items-center gap-2 pointer-events-none"
-            >
-              <span className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase">
-                Scroll to explore
-              </span>
-              <div className="scroll-indicator w-5 h-8 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
-                <div className="w-1 h-2 rounded-full bg-primary" />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+
 
         {/* Social links - only visible when scrolled to bottom */}
         <AnimatePresence>
