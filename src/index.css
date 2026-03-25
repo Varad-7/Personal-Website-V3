@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 6%;
+    --foreground: 220 15% 90%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 220 15% 90%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 220 15% 90%;
+
+    --primary: 230 90% 65%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 275 80% 65%;
+    --secondary-foreground: 220 20% 6%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 275 80% 65%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 230 90% 65%;
+
+    --radius: 0.75rem;
+
+    --neon-blue: 230 90% 65%;
+    --neon-purple: 275 80% 65%;
+    --neon-cyan: 190 95% 60%;
+    --void: 220 20% 4%;
+    --glass: 220 20% 12%;
+    --glass-border: 220 15% 22%;
+
+    --font-display: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --sidebar-background: 220 20% 8%;
+    --sidebar-foreground: 220 15% 90%;
+    --sidebar-primary: 230 90% 65%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 275 80% 65%;
+    --sidebar-accent-foreground: 220 20% 6%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 230 90% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-display);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-xl border rounded-lg;
+    background: hsla(var(--glass), 0.6);
+    border-color: hsla(var(--glass-border), 0.4);
+    box-shadow: 
+      0 0 30px hsla(var(--neon-blue), 0.08),
+      inset 0 1px 0 hsla(var(--foreground), 0.05);
+  }
+
+  .neon-text-blue {
+    color: hsl(var(--neon-blue));
+    text-shadow: 0 0 20px hsla(var(--neon-blue), 0.5), 0 0 40px hsla(var(--neon-blue), 0.2);
+  }
+
+  .neon-text-purple {
+    color: hsl(var(--neon-purple));
+    text-shadow: 0 0 20px hsla(var(--neon-purple), 0.5), 0 0 40px hsla(var(--neon-purple), 0.2);
+  }
+
+  .neon-glow-blue {
+    box-shadow: 0 0 15px hsla(var(--neon-blue), 0.3), 0 0 30px hsla(var(--neon-blue), 0.1);
+  }
+
+  .neon-glow-purple {
+    box-shadow: 0 0 15px hsla(var(--neon-purple), 0.3), 0 0 30px hsla(var(--neon-purple), 0.1);
+  }
+
+  .terminal-cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .scroll-indicator {
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+}
